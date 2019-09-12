@@ -15,7 +15,7 @@ const AppNavigator = createStackNavigator(
     Add: {screen: AddScreen},
     SignUp: {screen: SignUpScreen},
   },
-  {initialRouteName: 'SignUp'},
+  {initialRouteName: 'Login'},
 );
 
 export default createAppContainer(AppNavigator);

@@ -5,7 +5,8 @@
   "scripts": {
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "relay": "relay-compiler --src ./src --schema ./data/schema.graphql"
   },
   "dependencies": {
     "react": "16.8.6",
@@ -15,6 +16,7 @@
     "react-native-screens": "^2.0.0-alpha.1",
     "react-navigation": "4.0.0",
     "react-navigation-stack": "^1.5.3",
+    "react-relay": "5.0.0",
     "styled-components": "4.3.2"
   },
   "devDependencies": {
@@ -22,10 +24,13 @@
     "@babel/runtime": "^7.6.0",
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-jest": "^24.9.0",
+    "babel-plugin-relay": "5.0.0",
     "eslint": "^6.3.0",
+    "graphql": "14.5.4",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
-    "react-test-renderer": "16.8.6"
+    "react-test-renderer": "16.8.6",
+    "relay-compiler": "5.0.0"
   },
   "jest": {
     "preset": "react-native"
