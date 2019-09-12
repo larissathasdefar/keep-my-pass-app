@@ -639,6 +639,18 @@
               "deprecationReason": null
             },
             {
+              "name": "login",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "password",
               "description": null,
               "args": [],
@@ -1212,6 +1224,20 @@
           "inputFields": [
             {
               "name": "website",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "login",
               "description": null,
               "type": {
                 "kind": "NON_NULL",

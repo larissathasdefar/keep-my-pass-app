@@ -15,7 +15,14 @@ const Text = styled.Text`
   color: ${({color}) => (color === 'secondary' ? Colors.dark : Colors.white)};
 `;
 
-const Button = ({children, title, color = 'primary', onPress}) => (
+type IProps = {
+  title?: string,
+  color?: 'primary' | 'secondary',
+  children?: Node,
+  onPress?: () => void,
+};
+
+const Button = ({children, title, color = 'primary', onPress}: IProps) => (
   <Wrapper onPress={onPress} color={color}>
     {children}
     {title ? <Text color={color}>{title}</Text> : children}

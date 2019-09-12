@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Colors from '../components/colors';
 import Base from '../components/Base/Base';
 import Button from '../components/Button/Button';
+import Pass from '../relay/PassQuery';
 
 const Title = styled.Text`
   margin: 8px;
@@ -26,6 +27,7 @@ const Body = styled.View``;
 const Detail = ({navigation}) => {
   return (
     <Base>
+      {/* <Pass id="5d79bfdad0cc693d3899ff4e" /> */}
       <Body>
         <Title>Hotmail</Title>
         <Info>

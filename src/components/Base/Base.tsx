@@ -19,7 +19,11 @@ const SafeAreaView = styled.SafeAreaView`
   flex: 1;
 `;
 
-const Base = ({children}) => {
+type IProps = {
+  children?: Node,
+};
+
+const Base = ({children}: IProps) => {
   return (
     <Fragment>
       <StatusBar barStyle="dark-content" />

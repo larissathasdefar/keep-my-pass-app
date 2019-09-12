@@ -9,13 +9,21 @@ const Wrapper = styled.TextInput`
   border-radius: 4;
 `;
 
+type IProps = {
+  value?: string,
+  placeholder?: string,
+  keyboardType?: string,
+  secureTextEntry?: boolean,
+  onChangeText?: (string) => void,
+};
+
 const TextInput = ({
   value,
   placeholder,
   keyboardType,
   secureTextEntry,
   onChangeText,
-}) => (
+}: IProps) => (
   <Wrapper
     placeholder={placeholder}
     value={value}
