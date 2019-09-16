@@ -35,6 +35,9 @@ export default function createQueryRenderer(
             }
 
             if (props) {
+            //   return <View>
+            //   {props.passes.map(item => <Text key={item._id}>{Object.keys(item)}</Text>)}
+            // </View>
               const fragmentProps = config.getFragmentProps
                 ? config.getFragmentProps(props)
                 : { query: props };

@@ -20,7 +20,7 @@ const Pass = ({ pass }: IPass) => (
   </View>
 );
 
-const PassFragmentContainer = createFragmentContainer(
+export const PassFragmentContainer = createFragmentContainer(
   Pass, {
   pass: graphql`
     fragment PassQuery_pass on Pass {
@@ -32,7 +32,7 @@ const PassFragmentContainer = createFragmentContainer(
   `,
 });
 
-const App = createQueryRenderer(
+const PassQuery = createQueryRenderer(
   PassFragmentContainer,
   Pass,
   {
@@ -48,5 +48,4 @@ const App = createQueryRenderer(
   },
 );
 
-export default App;
-
+export default PassQuery;
