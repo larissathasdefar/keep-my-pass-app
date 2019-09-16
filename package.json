@@ -6,7 +6,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "relay": "relay-compiler  --watchman false --src ./src --schema ./data/schema.graphql --language typescript --artifactDirectory ./src/relay/__generated__"
+    "relay": "relay-compiler --watchman false --src ./src --schema data/schema.graphql --language typescript --artifactDirectory ./src/relay/__generated__"
   },
   "dependencies": {
     "react": "16.8.6",

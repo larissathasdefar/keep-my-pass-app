@@ -6,9 +6,7 @@ export type PassesQueryVariables = {
     readonly email: string;
 };
 export type PassesQueryResponse = {
-    readonly passes: ReadonlyArray<{
-        readonly " $fragmentRefs": PassesQuery_passes$ref;
-    }> | null;
+    readonly " $fragmentRefs": PassesQuery_passes$ref;
 };
 export type PassesQuery = {
     readonly response: PassesQueryResponse;
@@ -21,17 +19,21 @@ export type PassesQuery = {
 query PassesQuery(
   $email: String!
 ) {
-  passes(email: $email) {
-    ...PassesQuery_passes
-    id
-  }
+  ...PassesQuery_passes
 }
 
-fragment PassesQuery_passes on Pass {
-  website
-  login
-  password
-  _id
+fragment PassesQuery_passes on Query {
+  passes(email: $email) {
+    edges {
+      node {
+        website
+        login
+        password
+        _id
+        id
+      }
+    }
+  }
 }
 */
 
@@ -42,13 +44,6 @@ var v0 = [
     "name": "email",
     "type": "String!",
     "defaultValue": null
-  }
-],
-v1 = [
-  {
-    "kind": "Variable",
-    "name": "email",
-    "variableName": "email"
   }
 ];
 return {
@@ -61,20 +56,9 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "passes",
-        "storageKey": null,
-        "args": (v1/*: any*/),
-        "concreteType": "Pass",
-        "plural": true,
-        "selections": [
-          {
-            "kind": "FragmentSpread",
-            "name": "PassesQuery_passes",
-            "args": null
-          }
-        ]
+        "kind": "FragmentSpread",
+        "name": "PassesQuery_passes",
+        "args": null
       }
     ]
   },
@@ -88,44 +72,72 @@ return {
         "alias": null,
         "name": "passes",
         "storageKey": null,
-        "args": (v1/*: any*/),
-        "concreteType": "Pass",
-        "plural": true,
+        "args": [
+          {
+            "kind": "Variable",
+            "name": "email",
+            "variableName": "email"
+          }
+        ],
+        "concreteType": "PassConnection",
+        "plural": false,
         "selections": [
           {
-            "kind": "ScalarField",
+            "kind": "LinkedField",
             "alias": null,
-            "name": "website",
+            "name": "edges",
+            "storageKey": null,
             "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "login",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "password",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "_id",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
+            "concreteType": "PassEdge",
+            "plural": true,
+            "selections": [
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "node",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "Pass",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "website",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "login",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "password",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "_id",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "id",
+                    "args": null,
+                    "storageKey": null
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
@@ -135,10 +147,10 @@ return {
     "operationKind": "query",
     "name": "PassesQuery",
     "id": null,
-    "text": "query PassesQuery(\n  $email: String!\n) {\n  passes(email: $email) {\n    ...PassesQuery_passes\n    id\n  }\n}\n\nfragment PassesQuery_passes on Pass {\n  website\n  login\n  password\n  _id\n}\n",
+    "text": "query PassesQuery(\n  $email: String!\n) {\n  ...PassesQuery_passes\n}\n\nfragment PassesQuery_passes on Query {\n  passes(email: $email) {\n    edges {\n      node {\n        website\n        login\n        password\n        _id\n        id\n      }\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = '887a7af1f2b2e73e33bb2c8ecf657d78';
+(node as any).hash = '38af68389b3aca571f0c27d52d5c403f';
 export default node;

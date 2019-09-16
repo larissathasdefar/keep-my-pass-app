@@ -5,6 +5,8 @@ import {QueryRenderer, GraphQLTaggedNode, Variables} from 'react-relay';
 
 import Environment from './Environment';
 
+import TextInput from '../components/TextInput/TextInput';
+
 
 type Config = {
   query: GraphQLTaggedNode,
@@ -35,9 +37,11 @@ export default function createQueryRenderer(
             }
 
             if (props) {
-              return <View>
-              {props.passes.map(item => <Text key={item._id}>{Object.keys(item)}</Text>)}
-            </View>
+              // return <View>
+              // <TextInput
+              //   value={JSON.stringify(props)}
+              // />
+              // </View>
               const fragmentProps = config.getFragmentProps
                 ? config.getFragmentProps(props)
                 : { query: props };

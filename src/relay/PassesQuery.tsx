@@ -14,18 +14,25 @@ type IPasses = {
 
 const Passes = ({ passes }: IPasses) => (
   <View>
-    <Text>aaaaa</Text>
+    {/* <Text>{Object.keys(passes)}</Text> */}
+    <Text>{passes}</Text>
   </View>
 );
 
 export const PassesFragmentContainer = createFragmentContainer(
   Passes, {
   passes: graphql`
-    fragment PassesQuery_passes on Pass {
-      website,
-      login,
-      password,
-      _id
+    fragment PassesQuery_passes on Query {
+      passes(email: $email) {
+          edges {
+            node {
+              website,
+              login,
+              password,
+              _id
+            }
+          }
+      }
     },
   `,
 });
@@ -36,9 +43,7 @@ const PassesQuery = createQueryRenderer(
   {
     query: graphql`
       query PassesQuery($email: String!) {
-        passes(email: $email) {
-          ...PassesQuery_passes
-        }
+        ...PassesQuery_passes
       }
     `,
     queriesParams: ({email}) => ({email}),

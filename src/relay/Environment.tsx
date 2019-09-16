@@ -8,6 +8,7 @@ const fetchQuery = async (request, variables) => {
   const headers = {
     Accept: 'application/json',
     'Content-type': 'application/json',
+    // Authorization: getToken()  //TODO: get token where it will be storaged
   };
 
   const response = await fetch('http://localhost:5000/graphql', {
