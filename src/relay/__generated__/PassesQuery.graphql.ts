@@ -1,12 +1,14 @@
 /* tslint:disable */
 
 import { ConcreteRequest } from "relay-runtime";
-import { PassesQuery_passes$ref } from "./PassesQuery_passes.graphql";
+import { PassesQuery_query$ref } from "./PassesQuery_query.graphql";
 export type PassesQueryVariables = {
+    readonly count: number;
+    readonly cursor?: string | null;
     readonly email: string;
 };
 export type PassesQueryResponse = {
-    readonly " $fragmentRefs": PassesQuery_passes$ref;
+    readonly " $fragmentRefs": PassesQuery_query$ref;
 };
 export type PassesQuery = {
     readonly response: PassesQueryResponse;
@@ -17,21 +19,29 @@ export type PassesQuery = {
 
 /*
 query PassesQuery(
+  $count: Int!
+  $cursor: String
   $email: String!
 ) {
-  ...PassesQuery_passes
+  ...PassesQuery_query
 }
 
-fragment PassesQuery_passes on Query {
-  passes(email: $email) {
+fragment PassesQuery_query on Query {
+  passes(first: $count, after: $cursor, email: $email) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
     edges {
       node {
+        id
+        _id
         website
         login
         password
-        _id
-        id
+        __typename
       }
+      cursor
     }
   }
 }
@@ -41,9 +51,38 @@ const node: ConcreteRequest = (function(){
 var v0 = [
   {
     "kind": "LocalArgument",
+    "name": "count",
+    "type": "Int!",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "cursor",
+    "type": "String",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
     "name": "email",
     "type": "String!",
     "defaultValue": null
+  }
+],
+v1 = [
+  {
+    "kind": "Variable",
+    "name": "after",
+    "variableName": "cursor"
+  },
+  {
+    "kind": "Variable",
+    "name": "email",
+    "variableName": "email"
+  },
+  {
+    "kind": "Variable",
+    "name": "first",
+    "variableName": "count"
   }
 ];
 return {
@@ -57,7 +96,7 @@ return {
     "selections": [
       {
         "kind": "FragmentSpread",
-        "name": "PassesQuery_passes",
+        "name": "PassesQuery_query",
         "args": null
       }
     ]
@@ -72,16 +111,35 @@ return {
         "alias": null,
         "name": "passes",
         "storageKey": null,
-        "args": [
-          {
-            "kind": "Variable",
-            "name": "email",
-            "variableName": "email"
-          }
-        ],
+        "args": (v1/*: any*/),
         "concreteType": "PassConnection",
         "plural": false,
         "selections": [
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "pageInfo",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "PageInfoExtended",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "hasNextPage",
+                "args": null,
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "endCursor",
+                "args": null,
+                "storageKey": null
+              }
+            ]
+          },
           {
             "kind": "LinkedField",
             "alias": null,
@@ -100,6 +158,20 @@ return {
                 "concreteType": "Pass",
                 "plural": false,
                 "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "id",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "_id",
+                    "args": null,
+                    "storageKey": null
+                  },
                   {
                     "kind": "ScalarField",
                     "alias": null,
@@ -124,21 +196,32 @@ return {
                   {
                     "kind": "ScalarField",
                     "alias": null,
-                    "name": "_id",
-                    "args": null,
-                    "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "name": "id",
+                    "name": "__typename",
                     "args": null,
                     "storageKey": null
                   }
                 ]
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "cursor",
+                "args": null,
+                "storageKey": null
               }
             ]
           }
+        ]
+      },
+      {
+        "kind": "LinkedHandle",
+        "alias": null,
+        "name": "passes",
+        "args": (v1/*: any*/),
+        "handle": "connection",
+        "key": "Passes_passes",
+        "filters": [
+          "email"
         ]
       }
     ]
@@ -147,10 +230,10 @@ return {
     "operationKind": "query",
     "name": "PassesQuery",
     "id": null,
-    "text": "query PassesQuery(\n  $email: String!\n) {\n  ...PassesQuery_passes\n}\n\nfragment PassesQuery_passes on Query {\n  passes(email: $email) {\n    edges {\n      node {\n        website\n        login\n        password\n        _id\n        id\n      }\n    }\n  }\n}\n",
+    "text": "query PassesQuery(\n  $count: Int!\n  $cursor: String\n  $email: String!\n) {\n  ...PassesQuery_query\n}\n\nfragment PassesQuery_query on Query {\n  passes(first: $count, after: $cursor, email: $email) {\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n    edges {\n      node {\n        id\n        _id\n        website\n        login\n        password\n        __typename\n      }\n      cursor\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = '38af68389b3aca571f0c27d52d5c403f';
+(node as any).hash = '192e18be25b7866d5ac402d29344ffe0';
 export default node;

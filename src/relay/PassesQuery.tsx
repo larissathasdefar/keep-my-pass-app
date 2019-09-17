@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import {graphql, createFragmentContainer} from 'react-relay';
+import {graphql, createFragmentContainer, createPaginationContainer} from 'react-relay';
 import createQueryRenderer from './QueryRender';
 
 type IPasses = {
@@ -15,40 +15,76 @@ type IPasses = {
 const Passes = ({ passes }: IPasses) => (
   <View>
     {/* <Text>{Object.keys(passes)}</Text> */}
-    <Text>{passes}</Text>
+    <Text>aaa{passes}</Text>
   </View>
 );
 
-export const PassesFragmentContainer = createFragmentContainer(
-  Passes, {
-  passes: graphql`
-    fragment PassesQuery_passes on Query {
-      passes(email: $email) {
-          edges {
-            node {
-              website,
-              login,
-              password,
-              _id
-            }
-          }
-      }
-    },
-  `,
-});
+const query = graphql`
+  query PassesQuery (
+    $count: Int!,
+    $cursor: String,
+    $email: String!
+  ) {
+    ...PassesQuery_query
+  }
+`
 
-const PassesQuery = createQueryRenderer(
-  PassesFragmentContainer,
+const PassesPaginationContainer = createPaginationContainer(
   Passes,
   {
     query: graphql`
-      query PassesQuery($email: String!) {
-        ...PassesQuery_passes
+      fragment PassesQuery_query on Query {
+        passes(
+          first: $count
+          after: $cursor
+          email: $email
+        ) @connection(key: "Passes_passes") {
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
+          edges {
+            node {
+              id
+              _id
+              website
+              login
+              password
+            }
+          }
+        }
       }
     `,
-    queriesParams: ({email}) => ({email}),
-    getFragmentProps: ({ passes }: IPasses) => ({passes}),
+  },
+  {
+    direction: 'forward',
+    getConnectionFromProps(props) {
+      return props.query && props.query.passes;
+    },
+    getFragmentVariables(prevVars, totalCount) {
+      return {
+        ...prevVars,
+        count: totalCount,
+      };
+    },
+    getVariables(props, { count, cursor, email }, fragmentVariables) {
+      return {
+        count,
+        cursor,
+        email,
+      };
+    },
+    variables: { cursor: null },
+    query,
   },
 );
 
-export default PassesQuery;
+export default
+  createQueryRenderer(
+    PassesPaginationContainer,
+    Passes,
+    {
+      query,
+      variables: {cursor: null, count: 1, email: "larissa@lala.com"},
+    },
+  );

@@ -1,30 +1,56 @@
 /* tslint:disable */
 
 import { ReaderFragment } from "relay-runtime";
-declare const _PassesQuery_passes$ref: unique symbol;
-export type PassesQuery_passes$ref = typeof _PassesQuery_passes$ref;
-export type PassesQuery_passes = {
+declare const _PassesQuery_query$ref: unique symbol;
+export type PassesQuery_query$ref = typeof _PassesQuery_query$ref;
+export type PassesQuery_query = {
     readonly passes: {
+        readonly pageInfo: {
+            readonly hasNextPage: boolean;
+            readonly endCursor: string | null;
+        };
         readonly edges: ReadonlyArray<{
             readonly node: {
+                readonly id: string;
+                readonly _id: string | null;
                 readonly website: string | null;
                 readonly login: string | null;
                 readonly password: string | null;
-                readonly _id: string | null;
             };
         } | null>;
     } | null;
-    readonly " $refType": PassesQuery_passes$ref;
+    readonly " $refType": PassesQuery_query$ref;
 };
 
 
 
 const node: ReaderFragment = {
   "kind": "Fragment",
-  "name": "PassesQuery_passes",
+  "name": "PassesQuery_query",
   "type": "Query",
-  "metadata": null,
+  "metadata": {
+    "connection": [
+      {
+        "count": "count",
+        "cursor": "cursor",
+        "direction": "forward",
+        "path": [
+          "passes"
+        ]
+      }
+    ]
+  },
   "argumentDefinitions": [
+    {
+      "kind": "RootArgument",
+      "name": "count",
+      "type": "Int"
+    },
+    {
+      "kind": "RootArgument",
+      "name": "cursor",
+      "type": "String"
+    },
     {
       "kind": "RootArgument",
       "name": "email",
@@ -34,8 +60,8 @@ const node: ReaderFragment = {
   "selections": [
     {
       "kind": "LinkedField",
-      "alias": null,
-      "name": "passes",
+      "alias": "passes",
+      "name": "__Passes_passes_connection",
       "storageKey": null,
       "args": [
         {
@@ -47,6 +73,31 @@ const node: ReaderFragment = {
       "concreteType": "PassConnection",
       "plural": false,
       "selections": [
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "name": "pageInfo",
+          "storageKey": null,
+          "args": null,
+          "concreteType": "PageInfoExtended",
+          "plural": false,
+          "selections": [
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "hasNextPage",
+              "args": null,
+              "storageKey": null
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "endCursor",
+              "args": null,
+              "storageKey": null
+            }
+          ]
+        },
         {
           "kind": "LinkedField",
           "alias": null,
@@ -65,6 +116,20 @@ const node: ReaderFragment = {
               "concreteType": "Pass",
               "plural": false,
               "selections": [
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "name": "id",
+                  "args": null,
+                  "storageKey": null
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "name": "_id",
+                  "args": null,
+                  "storageKey": null
+                },
                 {
                   "kind": "ScalarField",
                   "alias": null,
@@ -89,11 +154,18 @@ const node: ReaderFragment = {
                 {
                   "kind": "ScalarField",
                   "alias": null,
-                  "name": "_id",
+                  "name": "__typename",
                   "args": null,
                   "storageKey": null
                 }
               ]
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "cursor",
+              "args": null,
+              "storageKey": null
             }
           ]
         }
@@ -101,5 +173,5 @@ const node: ReaderFragment = {
     }
   ]
 };
-(node as any).hash = 'cd4b242a38287e2df87780d1652c7803';
+(node as any).hash = 'fe58ad7a18d8254159ab03da4dba9050';
 export default node;
