@@ -1,36 +1,35 @@
 /* tslint:disable */
 
 import { ConcreteRequest } from "relay-runtime";
-export type UserLoginWithEmailInput = {
+export type UserRegisterWithEmailInput = {
+    readonly name: string;
     readonly email: string;
     readonly password: string;
     readonly clientMutationId?: string | null;
 };
-export type UserMutationVariables = {
-    readonly input: UserLoginWithEmailInput;
+export type SignUpMutationVariables = {
+    readonly input: UserRegisterWithEmailInput;
 };
-export type UserMutationResponse = {
-    readonly UserLoginWithEmail: {
+export type SignUpMutationResponse = {
+    readonly UserRegisterWithEmail: {
         readonly token: string | null;
         readonly error: string | null;
-        readonly clientMutationId: string | null;
     } | null;
 };
-export type UserMutation = {
-    readonly response: UserMutationResponse;
-    readonly variables: UserMutationVariables;
+export type SignUpMutation = {
+    readonly response: SignUpMutationResponse;
+    readonly variables: SignUpMutationVariables;
 };
 
 
 
 /*
-mutation UserMutation(
-  $input: UserLoginWithEmailInput!
+mutation SignUpMutation(
+  $input: UserRegisterWithEmailInput!
 ) {
-  UserLoginWithEmail(input: $input) {
+  UserRegisterWithEmail(input: $input) {
     token
     error
-    clientMutationId
   }
 }
 */
@@ -40,7 +39,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "UserLoginWithEmailInput!",
+    "type": "UserRegisterWithEmailInput!",
     "defaultValue": null
   }
 ],
@@ -48,7 +47,7 @@ v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "UserLoginWithEmail",
+    "name": "UserRegisterWithEmail",
     "storageKey": null,
     "args": [
       {
@@ -57,7 +56,7 @@ v1 = [
         "variableName": "input"
       }
     ],
-    "concreteType": "UserLoginWithEmailPayload",
+    "concreteType": "UserRegisterWithEmailPayload",
     "plural": false,
     "selections": [
       {
@@ -73,13 +72,6 @@ v1 = [
         "name": "error",
         "args": null,
         "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "clientMutationId",
-        "args": null,
-        "storageKey": null
       }
     ]
   }
@@ -88,7 +80,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "UserMutation",
+    "name": "SignUpMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -96,18 +88,18 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "UserMutation",
+    "name": "SignUpMutation",
     "argumentDefinitions": (v0/*: any*/),
     "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "mutation",
-    "name": "UserMutation",
+    "name": "SignUpMutation",
     "id": null,
-    "text": "mutation UserMutation(\n  $input: UserLoginWithEmailInput!\n) {\n  UserLoginWithEmail(input: $input) {\n    token\n    error\n    clientMutationId\n  }\n}\n",
+    "text": "mutation SignUpMutation(\n  $input: UserRegisterWithEmailInput!\n) {\n  UserRegisterWithEmail(input: $input) {\n    token\n    error\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = 'fea9f8b8edd739b213390b1a59a33afb';
+(node as any).hash = '1f7847e9ec8981e17dffa93b2aa01a63';
 export default node;

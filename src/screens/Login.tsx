@@ -4,7 +4,7 @@ import Colors from '../components/colors';
 import Base from '../components/Base/Base';
 import TextInput from '../components/TextInput/TextInput';
 import Button from '../components/Button/Button';
-import UserMutation from '../relay/mutations/User';
+import LoginMutation from '../relay/mutations/Login';
 
 const Text = styled.Text`
   margin-top: 8;
@@ -47,7 +47,7 @@ const Login = ({navigation}) => {
       <Button
         title="Login"
         onPress={() => {
-          UserMutation.login({
+          LoginMutation.login({
             input: { email: login, password },
             onCompleted: () => navigation.navigate('Home'),
             onError: () => navigation.navigate('Login'),
@@ -56,7 +56,7 @@ const Login = ({navigation}) => {
       <Button
         color="secondary"
         title="Create an account"
-        onPress={() => navigation.navigate('Home')}
+        onPress={() => navigation.navigate('SignUp')}
       />
     </Base>
   );

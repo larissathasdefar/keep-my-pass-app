@@ -13,14 +13,12 @@ const storeToken = async (token, onError) => {
 const login = ({ input, onCompleted, onError }) => {
   commitMutation(Environment, {
     mutation: graphql`
-    mutation UserMutation($input: UserLoginWithEmailInput!) {
+    mutation LoginMutation($input: UserLoginWithEmailInput!) {
       UserLoginWithEmail(input: $input) {
         token
         error
-        clientMutationId
       }
-    }
-  `,
+    }`,
     variables: { input },
     onCompleted: props => {
       if (props.UserLoginWithEmail.error === null) {
