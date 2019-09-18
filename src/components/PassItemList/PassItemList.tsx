@@ -1,7 +1,8 @@
 import React from 'react';
+import {Clipboard} from 'react-native'
 import styled from 'styled-components';
-import Button from '../components/Button/Button';
-import Colors from '../components/colors';
+import Button from '../Button/Button';
+import Colors from '../colors';
 
 const Section = styled.View`
   margin: 8px 0px;
@@ -28,24 +29,13 @@ const TouchArea = styled.TouchableOpacity`
   width: 82%;
 `;
 
-const ScrollableArea = styled.ScrollView`
-  flex: 10;
-`;
-
-const Header = styled.Text`
-  flex: 1;
-  font-size: 16;
-  text-align: center;
-  margin-bottom: -26;
-`;
-
-const Footer = styled.View`
-  flex: 1;
-`;
+const writeToClipboard = async (pass) => {
+  await Clipboard.setString(pass);
+};
 
 const PassItemList = ({first, navigation, pass}) => (
   <Section first={first}>
-    <TouchArea onPress={() => navigation.navigate('Detail', {id: pass.is})}>
+    <TouchArea onPress={() => navigation.navigate('Detail', {id: pass.id})}>
       <Description>
         <Bold>Service:</Bold> {pass.website}
       </Description>
@@ -53,7 +43,7 @@ const PassItemList = ({first, navigation, pass}) => (
         <Bold>Login:</Bold> {pass.login}
       </Description>
     </TouchArea>
-    <Button title="Copy" onPress={() => navigation.navigate('Login')} />
+    <Button title="Copy" onPress={() => writeToClipboard(pass.password)} />
   </Section>
 );
 

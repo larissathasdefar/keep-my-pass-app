@@ -2,8 +2,9 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {graphql, QueryRenderer} from 'react-relay';
 import environment from './Environment'
+import PassItemList from '../components/PassItemList/PassItemList'
 
-const Passes = () => (
+const Passes = ({navigation}) => (
   <QueryRenderer
     environment={environment}
     query={graphql`
@@ -29,7 +30,14 @@ const Passes = () => (
       if (!props) {
         return <Text>Loading...</Text>;
       }
-      return <Text>Diz que vai filhoo</Text>;
+      return props.passes.edges.map(({ node }, index) => (
+        <PassItemList
+          key={node.id}
+          first={index === 0}
+          navigation={navigation}
+          pass={{ id: node.id, website: node.website, login: node.login, password: node.password }}
+        />
+      ))
     }}
   />
 )

@@ -23,7 +23,6 @@ export default function createQueryRenderer(
   class QueryRendererWrapper extends React.Component<{}> {
     render() {
       const variables = queriesParams ? queriesParams(this.props) : config.variables;
-      console.log('aaaaaaa', this.props)
       return (
         <QueryRenderer
           environment={Environment}
@@ -35,7 +34,6 @@ export default function createQueryRenderer(
             }
 
             if (props) {
-              console.log('bbbbbbb', props)
               const fragmentProps = config.getFragmentProps
                 ? config.getFragmentProps(props)
                 : { query: props };
