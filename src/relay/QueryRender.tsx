@@ -1,11 +1,9 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
 import hoistStatics from 'hoist-non-react-statics';
 import {QueryRenderer, GraphQLTaggedNode, Variables} from 'react-relay';
 
 import Environment from './Environment';
-
-import TextInput from '../components/TextInput/TextInput';
 
 
 type Config = {
@@ -25,7 +23,7 @@ export default function createQueryRenderer(
   class QueryRendererWrapper extends React.Component<{}> {
     render() {
       const variables = queriesParams ? queriesParams(this.props) : config.variables;
-
+      console.log('aaaaaaa', this.props)
       return (
         <QueryRenderer
           environment={Environment}
@@ -37,13 +35,11 @@ export default function createQueryRenderer(
             }
 
             if (props) {
-              // return <View>
-              // <TextInput value={JSON.stringify(props)} />
-              // </View>
+              console.log('bbbbbbb', props)
               const fragmentProps = config.getFragmentProps
                 ? config.getFragmentProps(props)
                 : { query: props };
-              return <FragmentComponent {...this.props} {...fragmentProps} />;
+              return <FragmentComponent query={props} {...this.props} {...fragmentProps} />;
             }
 
             return <Text>Loading...</Text>;

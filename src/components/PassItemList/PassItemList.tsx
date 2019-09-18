@@ -1,7 +1,5 @@
 import React from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
 import styled from 'styled-components';
-import Base from '../components/Base/Base';
 import Button from '../components/Button/Button';
 import Colors from '../components/colors';
 
@@ -44,15 +42,6 @@ const Header = styled.Text`
 const Footer = styled.View`
   flex: 1;
 `;
-
-const getToken = async onError => {
-  try {
-    const token = await AsyncStorage.getItem('KeepMyPassToken');
-    return token
-  } catch (error) {
-    onError()
-  }
-};
 
 const PassItemList = ({first, navigation, pass}) => (
   <Section first={first}>

@@ -1,14 +1,25 @@
 import {Environment, Network, RecordSource, Store} from 'relay-runtime';
+import AsyncStorage from '@react-native-community/async-storage';
+
+const getToken = async () => {
+  try {
+    const token = await AsyncStorage.getItem('KeepMyPassToken');
+    return token
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const fetchQuery = async (request, variables) => {
   const body = JSON.stringify({
     query: request.text,
     variables,
   });
+
   const headers = {
     Accept: 'application/json',
     'Content-type': 'application/json',
-    // Authorization: getToken()  //TODO: get token where it will be storaged
+    Authorization: await getToken(),
   };
 
   const response = await fetch('http://localhost:5000/graphql', {

@@ -1,10 +1,10 @@
 import React from 'react';
 import {Clipboard} from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage';
 import styled from 'styled-components';
 import Base from '../components/Base/Base';
 import Button from '../components/Button/Button';
 import Colors from '../components/colors';
+import Passes from '../relay/PassesQuery'
 
 const Section = styled.View`
   margin: 8px 0px;
@@ -46,25 +46,15 @@ const Footer = styled.View`
   flex: 1;
 `;
 
-const getToken = async onError => {
-  try {
-    const token = await AsyncStorage.getItem('KeepMyPassToken');
-    return token
-  } catch (error) {
-    onError()
-  }
-};
-
 const writeToClipboard = async (pass) => {
   await Clipboard.setString(pass);
-  alert('Copied to Clipboard!');
 };
 
 const Home = ({navigation}) => {
   return (
     <Base>
       <Header>Click on the emails to see the password</Header>
-
+      <Passes />
       <ScrollableArea>
         <Section first>
           <TouchArea onPress={() => navigation.navigate('Detail', {id: 'UGFzczo1ZDc4YTEyNWRhMWQwYjE3Y2U2OTYyMGE='})}>

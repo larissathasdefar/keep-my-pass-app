@@ -1,4 +1,5 @@
 import React from 'react';
+import {Clipboard} from 'react-native'
 import styled from 'styled-components';
 import Colors from '../colors';
 import Base from '../Base/Base';
@@ -25,7 +26,6 @@ const Body = styled.View``;
 
 const writeToClipboard = async (pass) => {
   await Clipboard.setString(pass);
-  alert('Copied to Clipboard!');
 };
 
 const PassDetail = ({pass}) => {
