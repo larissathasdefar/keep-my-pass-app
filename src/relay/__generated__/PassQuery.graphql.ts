@@ -31,7 +31,7 @@ fragment PassQuery_pass on Pass {
   website
   login
   password
-  _id
+  id
 }
 */
 
@@ -116,13 +116,6 @@ return {
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "_id",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
             "name": "id",
             "args": null,
             "storageKey": null
@@ -135,7 +128,7 @@ return {
     "operationKind": "query",
     "name": "PassQuery",
     "id": null,
-    "text": "query PassQuery(\n  $id: ID!\n) {\n  pass(id: $id) {\n    ...PassQuery_pass\n    id\n  }\n}\n\nfragment PassQuery_pass on Pass {\n  website\n  login\n  password\n  _id\n}\n",
+    "text": "query PassQuery(\n  $id: ID!\n) {\n  pass(id: $id) {\n    ...PassQuery_pass\n    id\n  }\n}\n\nfragment PassQuery_pass on Pass {\n  website\n  login\n  password\n  id\n}\n",
     "metadata": {}
   }
 };

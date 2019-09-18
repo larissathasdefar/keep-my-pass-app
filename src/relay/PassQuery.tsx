@@ -13,7 +13,7 @@ export const PassFragmentContainer = createFragmentContainer(
       website,
       login,
       password,
-      _id
+      id
     },
   `,
 });

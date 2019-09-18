@@ -7,7 +7,7 @@ export type PassQuery_pass = {
     readonly website: string | null;
     readonly login: string | null;
     readonly password: string | null;
-    readonly _id: string | null;
+    readonly id: string;
     readonly " $refType": PassQuery_pass$ref;
 };
 
@@ -44,11 +44,11 @@ const node: ReaderFragment = {
     {
       "kind": "ScalarField",
       "alias": null,
-      "name": "_id",
+      "name": "id",
       "args": null,
       "storageKey": null
     }
   ]
 };
-(node as any).hash = '8a33626aba34429f55e57baed3fd725d';
+(node as any).hash = '986ab0978fc2ad9d6beb59c82e0e05c1';
 export default node;
