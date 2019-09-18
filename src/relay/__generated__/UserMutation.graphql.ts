@@ -6,25 +6,25 @@ export type UserLoginWithEmailInput = {
     readonly password: string;
     readonly clientMutationId?: string | null;
 };
-export type LoginMutationVariables = {
+export type UserMutationVariables = {
     readonly input: UserLoginWithEmailInput;
 };
-export type LoginMutationResponse = {
+export type UserMutationResponse = {
     readonly UserLoginWithEmail: {
         readonly token: string | null;
         readonly error: string | null;
         readonly clientMutationId: string | null;
     } | null;
 };
-export type LoginMutation = {
-    readonly response: LoginMutationResponse;
-    readonly variables: LoginMutationVariables;
+export type UserMutation = {
+    readonly response: UserMutationResponse;
+    readonly variables: UserMutationVariables;
 };
 
 
 
 /*
-mutation LoginMutation(
+mutation UserMutation(
   $input: UserLoginWithEmailInput!
 ) {
   UserLoginWithEmail(input: $input) {
@@ -88,7 +88,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "LoginMutation",
+    "name": "UserMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -96,18 +96,18 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "LoginMutation",
+    "name": "UserMutation",
     "argumentDefinitions": (v0/*: any*/),
     "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "mutation",
-    "name": "LoginMutation",
+    "name": "UserMutation",
     "id": null,
-    "text": "mutation LoginMutation(\n  $input: UserLoginWithEmailInput!\n) {\n  UserLoginWithEmail(input: $input) {\n    token\n    error\n    clientMutationId\n  }\n}\n",
+    "text": "mutation UserMutation(\n  $input: UserLoginWithEmailInput!\n) {\n  UserLoginWithEmail(input: $input) {\n    token\n    error\n    clientMutationId\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = '1493359fc280714764e719be7eba4905';
+(node as any).hash = 'fea9f8b8edd739b213390b1a59a33afb';
 export default node;

@@ -1,6 +1,7 @@
 import React from 'react';
+import {Clipboard} from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage';
 import styled from 'styled-components';
-import {Text} from 'react-native';
 import Base from '../components/Base/Base';
 import Button from '../components/Button/Button';
 import Colors from '../components/colors';
@@ -45,34 +46,48 @@ const Footer = styled.View`
   flex: 1;
 `;
 
-const Login = ({navigation}) => {
+const getToken = async onError => {
+  try {
+    const token = await AsyncStorage.getItem('KeepMyPassToken');
+    return token
+  } catch (error) {
+    onError()
+  }
+};
+
+const writeToClipboard = async (pass) => {
+  await Clipboard.setString(pass);
+  alert('Copied to Clipboard!');
+};
+
+const Home = ({navigation}) => {
   return (
     <Base>
       <Header>Click on the emails to see the password</Header>
 
       <ScrollableArea>
         <Section first>
-          <TouchArea onPress={() => navigation.navigate('Detail')}>
+          <TouchArea onPress={() => navigation.navigate('Detail', {id: 'UGFzczo1ZDc4YTEyNWRhMWQwYjE3Y2U2OTYyMGE='})}>
             <Description>
-              <Bold>Service:</Bold> Hotmail
+              <Bold>Service:</Bold> LoLuLi
             </Description>
             <Description>
-              <Bold>Login:</Bold> emailasi@lalalala.com
+              <Bold>Login:</Bold> larissa@lala.com
             </Description>
           </TouchArea>
-          <Button title="Copy" onPress={() => navigation.navigate('Login')} />
+          <Button title="Copy" onPress={() => writeToClipboard('password')} />
         </Section>
 
         <Section>
-          <TouchArea onPress={() => navigation.navigate('Detail')}>
+          <TouchArea onPress={() => navigation.navigate('Detail', {id: 'UGFzczo1ZDc5YmZkYWQwY2M2OTNkMzg5OWZmNGU='})}>
             <Description>
               <Bold>Service:</Bold> Hotmail
             </Description>
             <Description>
-              <Bold>Login:</Bold> emailasi@lalalala.com
+              <Bold>Login:</Bold> larissa@lala.com
             </Description>
           </TouchArea>
-          <Button title="Copy" onPress={() => navigation.navigate('Login')} />
+          <Button title="Copy" onPress={() => writeToClipboard('password')} />
         </Section>
       </ScrollableArea>
 
@@ -86,4 +101,4 @@ const Login = ({navigation}) => {
   );
 };
 
-export default Login;
+export default Home;

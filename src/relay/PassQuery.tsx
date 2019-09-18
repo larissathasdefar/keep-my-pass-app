@@ -1,24 +1,10 @@
 import React from 'react';
-import {Text, View} from 'react-native';
 import {graphql, createFragmentContainer} from 'react-relay';
 import createQueryRenderer from './QueryRender';
+import PassDetail from '../components/PassDetail/PassDetail'
+import {PassQueryResponse} from './__generated__/PassQuery.graphql'
 
-type IPass = {
-  pass: {
-    website: string,
-    login: string,
-    password: string,
-    _id: string,
-  }
-}
-
-const Pass = ({ pass }: IPass) => (
-  <View>
-    <Text>Service: {pass.website}</Text>
-    <Text>Login: {pass.login}</Text>
-    <Text>Password: {pass.password}</Text>
-  </View>
-);
+const Pass = ({ pass }: PassQueryResponse) => <PassDetail pass={pass} />;
 
 export const PassFragmentContainer = createFragmentContainer(
   Pass, {
@@ -44,7 +30,7 @@ const PassQuery = createQueryRenderer(
       }
     `,
     queriesParams: ({id}) => ({id}),
-    getFragmentProps: ({ pass }: IPass) => ({pass}),
+    getFragmentProps: ({ pass }: PassQueryResponse) => ({pass}),
   },
 );
 

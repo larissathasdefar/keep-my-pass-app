@@ -24,8 +24,8 @@ const Subtitle = styled(Text)`
 `;
 
 const Login = ({navigation}) => {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+  const [login, setLogin] = useState('larissa@lala.com');
+  const [password, setPassword] = useState('123');
   return (
     <Base>
       <Title>Keep My Pass</Title>
@@ -50,7 +50,7 @@ const Login = ({navigation}) => {
           UserMutation.login({
             input: { email: login, password },
             onCompleted: () => navigation.navigate('Home'),
-            onError: (errors) => console.log(errors)
+            onError: () => navigation.navigate('Login'),
           })
         }} />
       <Button

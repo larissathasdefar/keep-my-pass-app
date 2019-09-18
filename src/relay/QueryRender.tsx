@@ -38,9 +38,7 @@ export default function createQueryRenderer(
 
             if (props) {
               // return <View>
-              // <TextInput
-              //   value={JSON.stringify(props)}
-              // />
+              // <TextInput value={JSON.stringify(props)} />
               // </View>
               const fragmentProps = config.getFragmentProps
                 ? config.getFragmentProps(props)
