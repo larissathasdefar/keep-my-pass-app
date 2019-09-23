@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
+    "start-ios": "react-native run-ios --simulator=\"iPhone 11 Pro\"",
     "test": "jest",
     "lint": "eslint .",
     "relay": "relay-compiler --watchman false --src ./src --schema data/schema.graphql --language typescript --artifactDirectory ./src/relay/__generated__"
