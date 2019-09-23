@@ -1,37 +1,34 @@
 /* tslint:disable */
 
 import { ConcreteRequest } from "relay-runtime";
-import { PassQuery_pass$ref } from "./PassQuery_pass.graphql";
-export type PassQueryVariables = {
+import { PassDetail_query$ref } from "./PassDetail_query.graphql";
+export type PassDetailQueryVariables = {
     readonly id: string;
 };
-export type PassQueryResponse = {
-    readonly pass: {
-        readonly " $fragmentRefs": PassQuery_pass$ref;
-    } | null;
+export type PassDetailQueryResponse = {
+    readonly " $fragmentRefs": PassDetail_query$ref;
 };
-export type PassQuery = {
-    readonly response: PassQueryResponse;
-    readonly variables: PassQueryVariables;
+export type PassDetailQuery = {
+    readonly response: PassDetailQueryResponse;
+    readonly variables: PassDetailQueryVariables;
 };
 
 
 
 /*
-query PassQuery(
+query PassDetailQuery(
   $id: ID!
 ) {
-  pass(id: $id) {
-    ...PassQuery_pass
-    id
-  }
+  ...PassDetail_query
 }
 
-fragment PassQuery_pass on Pass {
-  website
-  login
-  password
-  id
+fragment PassDetail_query on Query {
+  pass(id: $id) {
+    website
+    login
+    password
+    id
+  }
 }
 */
 
@@ -43,44 +40,26 @@ var v0 = [
     "type": "ID!",
     "defaultValue": null
   }
-],
-v1 = [
-  {
-    "kind": "Variable",
-    "name": "id",
-    "variableName": "id"
-  }
 ];
 return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "PassQuery",
+    "name": "PassDetailQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "pass",
-        "storageKey": null,
-        "args": (v1/*: any*/),
-        "concreteType": "Pass",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "FragmentSpread",
-            "name": "PassQuery_pass",
-            "args": null
-          }
-        ]
+        "kind": "FragmentSpread",
+        "name": "PassDetail_query",
+        "args": null
       }
     ]
   },
   "operation": {
     "kind": "Operation",
-    "name": "PassQuery",
+    "name": "PassDetailQuery",
     "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
@@ -88,7 +67,13 @@ return {
         "alias": null,
         "name": "pass",
         "storageKey": null,
-        "args": (v1/*: any*/),
+        "args": [
+          {
+            "kind": "Variable",
+            "name": "id",
+            "variableName": "id"
+          }
+        ],
         "concreteType": "Pass",
         "plural": false,
         "selections": [
@@ -126,12 +111,12 @@ return {
   },
   "params": {
     "operationKind": "query",
-    "name": "PassQuery",
+    "name": "PassDetailQuery",
     "id": null,
-    "text": "query PassQuery(\n  $id: ID!\n) {\n  pass(id: $id) {\n    ...PassQuery_pass\n    id\n  }\n}\n\nfragment PassQuery_pass on Pass {\n  website\n  login\n  password\n  id\n}\n",
+    "text": "query PassDetailQuery(\n  $id: ID!\n) {\n  ...PassDetail_query\n}\n\nfragment PassDetail_query on Query {\n  pass(id: $id) {\n    website\n    login\n    password\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = '4bf5dd9c5503719c04d0c42b29e14151';
+(node as any).hash = '28427db21e904d93e360f00a4b114568';
 export default node;

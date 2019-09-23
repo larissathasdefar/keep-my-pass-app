@@ -3,7 +3,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 import LoginScreen from './screens/Login';
 import HomeScreen from './screens/Home';
-import DetailScreen from './screens/Detail';
+import DetailScreen from './relay/PassDetail';
 import AddScreen from './screens/AddPass';
 import SignUpScreen from './screens/SignUp';
 
