@@ -3,8 +3,8 @@ import {StyleSheet, Text} from 'react-native';
 import Colors from '../components/colors';
 import TextInput from '../components/TextInput/TextInput';
 import Button from '../components/Button/Button';
-
 import Base from '../components/Base/Base';
+import CreatePassMutation from '../relay/mutations/CreatePass';
 
 const Add = ({
   navigation,
@@ -43,7 +43,16 @@ const Add = ({
         value={passwordState}
         onChangeText={text => setPassword(text)}
       />
-      <Button title="Create" onPress={() => navigation.navigate('Home')} />
+      <Button
+        title={mode === 'add' ? 'Create' : 'Edit'}
+        onPress={() => {
+          CreatePassMutation.createPass({
+            input: { website: serviceState, login: loginState, password: passwordState },
+            onCompleted: () => navigation.navigate('Home'),
+            onError: () => navigation.navigate('Login'),
+          })
+        }}
+      />
     </Base>
   );
 };
