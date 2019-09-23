@@ -30,20 +30,23 @@ const writeToClipboard = async (pass) => {
   await Clipboard.setString(pass);
 };
 
-const PassDetail = ({query}) => {
-  const {website, login, password} = query.pass;
+const PassDetail = ({query, navigation}) => {
+  const {pass} = query;
   return (
     <Base>
       <Body>
-        <Title>{website}</Title>
+        <Title>{pass.website}</Title>
         <Info>
-          <Bold>Login:</Bold> {login}
+          <Bold>Login:</Bold> {pass.login}
         </Info>
         <Info>
-          <Bold>Password:</Bold> {password}
+          <Bold>Password:</Bold> {pass.password}
         </Info>
-        <Button title="Copy" onPress={() => writeToClipboard(password)} />
-        <Button title="Edit" onPress={() => navigation.navigate('Login')} />
+        <Button title="Copy" onPress={() => writeToClipboard(pass.password)} />
+        <Button
+          title="Edit"
+          onPress={() => navigation.navigate('PassForm', {pass})}
+        />
         <Button title="Delete" onPress={() => navigation.navigate('Login')} />
       </Body>
     </Base>
@@ -55,10 +58,10 @@ export const PassFragmentContainer = createFragmentContainer(
   query: graphql`
     fragment PassDetail_query on Query {
       pass(id: $id) {
-        website,
-        login,
-        password,
         id
+        website
+        login
+        password
       }
     },
   `,

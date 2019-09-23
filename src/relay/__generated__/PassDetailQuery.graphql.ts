@@ -24,10 +24,10 @@ query PassDetailQuery(
 
 fragment PassDetail_query on Query {
   pass(id: $id) {
+    id
     website
     login
     password
-    id
   }
 }
 */
@@ -80,6 +80,13 @@ return {
           {
             "kind": "ScalarField",
             "alias": null,
+            "name": "id",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
             "name": "website",
             "args": null,
             "storageKey": null
@@ -97,13 +104,6 @@ return {
             "name": "password",
             "args": null,
             "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
           }
         ]
       }
@@ -113,7 +113,7 @@ return {
     "operationKind": "query",
     "name": "PassDetailQuery",
     "id": null,
-    "text": "query PassDetailQuery(\n  $id: ID!\n) {\n  ...PassDetail_query\n}\n\nfragment PassDetail_query on Query {\n  pass(id: $id) {\n    website\n    login\n    password\n    id\n  }\n}\n",
+    "text": "query PassDetailQuery(\n  $id: ID!\n) {\n  ...PassDetail_query\n}\n\nfragment PassDetail_query on Query {\n  pass(id: $id) {\n    id\n    website\n    login\n    password\n  }\n}\n",
     "metadata": {}
   }
 };

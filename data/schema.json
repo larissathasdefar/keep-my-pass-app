@@ -1323,6 +1323,20 @@
           "fields": null,
           "inputFields": [
             {
+              "name": "id",
+              "description": "password global id",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
               "name": "password",
               "description": "pass new password",
               "type": {
@@ -1434,20 +1448,6 @@
             },
             {
               "name": "password",
-              "description": null,
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "user",
               "description": null,
               "type": {
                 "kind": "NON_NULL",

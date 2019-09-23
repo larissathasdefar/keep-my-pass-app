@@ -32,7 +32,7 @@ const Home = ({navigation}) => {
       <Footer>
         <Button
           title="Add a password"
-          onPress={() => navigation.navigate('Add')}
+          onPress={() => navigation.navigate('PassForm')}
         />
       </Footer>
     </Base>

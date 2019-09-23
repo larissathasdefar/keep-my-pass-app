@@ -1,17 +1,16 @@
 /* tslint:disable */
 
 import { ConcreteRequest } from "relay-runtime";
-export type PassCreateInput = {
-    readonly website: string;
-    readonly login: string;
+export type PassChangePasswordInput = {
+    readonly id: string;
     readonly password: string;
     readonly clientMutationId?: string | null;
 };
-export type CreatePassMutationVariables = {
-    readonly input: PassCreateInput;
+export type EditPassMutationVariables = {
+    readonly input: PassChangePasswordInput;
 };
-export type CreatePassMutationResponse = {
-    readonly PassCreate: {
+export type EditPassMutationResponse = {
+    readonly PassChangePassword: {
         readonly error: string | null;
         readonly pass: {
             readonly id: string;
@@ -21,18 +20,18 @@ export type CreatePassMutationResponse = {
         } | null;
     } | null;
 };
-export type CreatePassMutation = {
-    readonly response: CreatePassMutationResponse;
-    readonly variables: CreatePassMutationVariables;
+export type EditPassMutation = {
+    readonly response: EditPassMutationResponse;
+    readonly variables: EditPassMutationVariables;
 };
 
 
 
 /*
-mutation CreatePassMutation(
-  $input: PassCreateInput!
+mutation EditPassMutation(
+  $input: PassChangePasswordInput!
 ) {
-  PassCreate(input: $input) {
+  PassChangePassword(input: $input) {
     error
     pass {
       id
@@ -49,7 +48,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "PassCreateInput!",
+    "type": "PassChangePasswordInput!",
     "defaultValue": null
   }
 ],
@@ -57,7 +56,7 @@ v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "PassCreate",
+    "name": "PassChangePassword",
     "storageKey": null,
     "args": [
       {
@@ -66,7 +65,7 @@ v1 = [
         "variableName": "input"
       }
     ],
-    "concreteType": "PassCreatePayload",
+    "concreteType": "PassChangePasswordPayload",
     "plural": false,
     "selections": [
       {
@@ -122,7 +121,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "CreatePassMutation",
+    "name": "EditPassMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -130,18 +129,18 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "CreatePassMutation",
+    "name": "EditPassMutation",
     "argumentDefinitions": (v0/*: any*/),
     "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "mutation",
-    "name": "CreatePassMutation",
+    "name": "EditPassMutation",
     "id": null,
-    "text": "mutation CreatePassMutation(\n  $input: PassCreateInput!\n) {\n  PassCreate(input: $input) {\n    error\n    pass {\n      id\n      website\n      password\n      user\n    }\n  }\n}\n",
+    "text": "mutation EditPassMutation(\n  $input: PassChangePasswordInput!\n) {\n  PassChangePassword(input: $input) {\n    error\n    pass {\n      id\n      website\n      password\n      user\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = 'c5120aef1eb4896e10a2894d02d5e8f7';
+(node as any).hash = 'd50bd633fb0baeffd14fd5a10bbdf63b';
 export default node;

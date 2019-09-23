@@ -23,7 +23,6 @@ const Passes = ({navigation}) => (
     `}
     variables={{}}
     render={({error, props}) => {
-      console.log(props)
       if (error) {
         return <Text>Error!</Text>;
       }
