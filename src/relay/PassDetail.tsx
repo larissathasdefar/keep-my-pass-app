@@ -30,6 +30,7 @@ const writeToClipboard = async (pass) => {
   await Clipboard.setString(pass);
 };
 
+//TODO: Delete on server
 const PassDetail = ({query, navigation}) => {
   const {pass} = query;
   return (
@@ -47,7 +48,7 @@ const PassDetail = ({query, navigation}) => {
           title="Edit"
           onPress={() => navigation.navigate('PassForm', {pass})}
         />
-        <Button title="Delete" onPress={() => navigation.navigate('Login')} />
+        {/* <Button title="Delete" onPress={() => navigation.navigate('Login')} /> */}
       </Body>
     </Base>
   );

@@ -8,7 +8,7 @@ import CreatePassMutation from '../relay/mutations/CreatePass';
 import EditPassMutation from '../relay/mutations/EditPass';
 
 const Form = ({navigation}) => {
-  const pass = navigation.getParam('pass');
+  const pass = navigation.getParam('pass') || {};
   const editing = pass.id !== undefined;
   const [serviceState, setService] = useState(pass.website);
   const [loginState, setLogin] = useState(pass.login);
@@ -54,7 +54,7 @@ const Form = ({navigation}) => {
         onChangeText={text => setPassword(text)}
       />
       <Button
-        title={editing ? 'Edit' : 'Create'}
+        title={editing ? 'Save' : 'Create'}
         onPress={() => {
           if (editing) {
             EditPassMutation.editPass({

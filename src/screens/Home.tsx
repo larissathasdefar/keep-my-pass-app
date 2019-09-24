@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Base from '../components/Base/Base';
 import Button from '../components/Button/Button';
-import Colors from '../components/colors';
 import Passes from '../relay/PassesQuery'
 
 const ScrollableArea = styled.ScrollView`
