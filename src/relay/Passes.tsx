@@ -1,4 +1,4 @@
-import React, {Fragment, Component} from 'react';
+import React, {Component} from 'react';
 import {Text, Clipboard} from 'react-native';
 import {graphql, createPaginationContainer} from 'react-relay';
 import styled from 'styled-components';
@@ -7,7 +7,13 @@ import Button from '../components/Button/Button';
 import Colors from '../components/colors';
 import createQueryRenderer from './QueryRender';
 
-const ScrollableArea = styled.ScrollView`
+const NoItems = styled.View`
+  flex: 10;
+  justify-content: center;
+  align-items: center;
+`;
+
+const FlatListArea = styled.FlatList`
   flex: 10;
 `;
 
@@ -23,11 +29,14 @@ const Footer = styled.View`
   flex: 1;
 `;
 
+const Separator = styled.View`
+  background-color: #cccccc;
+  height: 1;
+  width: 100%;
+`;
+
 const Section = styled.View`
-  margin: 8px 0px;
-  padding: 8px 0px;
-  border-top-color: #cccccc;
-  border-top-width: ${({first}) => (first ? 0 : 1)};
+  margin: 8px 0px 16px 0px;
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
@@ -53,18 +62,58 @@ const writeToClipboard = async (pass) => {
 };
 
 class Passes extends Component {
-  _loadMore() {
+  state = {
+    isFetchingTop: false,
+  };
+
+  handleRefresh = () => {
+    const { passes } = this.props.query;
+
+    if (this.props.relay.isLoading()) {
+      return;
+    }
+
+    this.setState({isFetchingTop: true})
+
+    this.props.relay.refetchConnection(passes.edges.length, err => {
+      this.setState({isFetchingTop: false});
+    });
+  };
+
+  handleLoadMore() {
     if (!this.props.relay.hasMore() || this.props.relay.isLoading()) {
       return;
     }
-    // TODO: refetch
 
-    this.props.relay.loadMore(
-      2,  // Fetch the next pass item
-      error => {
-        error && console.log('loadMore: ', error);
-      },
-    );
+    // Fetch the next pass item
+    this.props.relay.loadMore(2, error => error && console.log('loadMoreError: ', error));
+  }
+
+  renderItem = ({item}) => {
+    const pass = item.node
+    return (
+      <Section key={pass.id}>
+        <TouchArea
+          onPress={() => this.props.navigation.navigate('Detail', {id: pass.id})}>
+          <Description>
+            <Bold>Service:</Bold> {pass.website}
+          </Description>
+          <Description>
+            <Bold>Login:</Bold> {pass.login}
+          </Description>
+        </TouchArea>
+        <Button title="Copy" onPress={() => writeToClipboard(pass.password)} />
+      </Section>
+    )
+  }
+
+  renderFooter = () => {
+    return this.props.relay.hasMore() && (
+      <Button
+        title="Load More"
+        onPress={() => this.handleLoadMore()}
+      />
+    )
   }
 
   render() {
@@ -72,44 +121,31 @@ class Passes extends Component {
       return <Text>Loading...</Text>;
     }
 
-    const {query, navigation, relay} = this.props;
-    const items = query.passes.edges;
+    const {query, navigation} = this.props;
     return (
       <Base>
         <Header>Click on the emails to see the password or create a new one.</Header>
 
-        <ScrollableArea>
-          {
-            items.length === 0
-              ? (
-                <Fragment>
-                  <Description>I'm feeling empty... so...</Description>
-                  <Description>Could you create a new password to make me feel better? :(</Description>
-                </Fragment>
-              )
-              : items.map(({ node: pass }, index) => (
-                <Section key={pass.id} first={index === 0}>
-                  <TouchArea onPress={() => navigation.navigate('Detail', {id: pass.id})}>
-                    <Description>
-                      <Bold>Service:</Bold> {pass.website}
-                    </Description>
-                    <Description>
-                      <Bold>Login:</Bold> {pass.login}
-                    </Description>
-                  </TouchArea>
-                  <Button title="Copy" onPress={() => writeToClipboard(pass.password)} />
-                </Section>
-              ))
-          }
-          {
-            relay.hasMore() && (
-              <Button
-                title="Load More"
-                onPress={() => this._loadMore()}
+        {
+          query.passes.edges.length > 0
+            ? (
+              <FlatListArea
+                data={query.passes.edges}
+                renderItem={this.renderItem}
+                keyExtractor={item => item.node.id}
+                onRefresh={this.handleRefresh}
+                refreshing={this.state.isFetchingTop}
+                ItemSeparatorComponent={() => <Separator />}
+                ListFooterComponent={this.renderFooter}
               />
             )
-          }
-      </ScrollableArea>
+            : (
+              <NoItems>
+                <Description>I'm feeling so empty...</Description>
+                <Description>Could you create a new password to make me feel better? :(</Description>
+              </NoItems>
+            )
+        }
 
       <Footer>
         <Button
