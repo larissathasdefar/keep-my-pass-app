@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Base from '../components/Base/Base';
 import Button from '../components/Button/Button';
-import Passes from '../relay/PassesQuery'
+import Passes from '../relay/Passes'
 
 const ScrollableArea = styled.ScrollView`
   flex: 10;

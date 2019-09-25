@@ -2,22 +2,22 @@
 
 import { ConcreteRequest } from "relay-runtime";
 import { Passes_query$ref } from "./Passes_query.graphql";
-export type PassesQueryVariables = {
+export type PassesPaginationQueryVariables = {
     readonly count: number;
     readonly cursor?: string | null;
 };
-export type PassesQueryResponse = {
+export type PassesPaginationQueryResponse = {
     readonly " $fragmentRefs": Passes_query$ref;
 };
-export type PassesQuery = {
-    readonly response: PassesQueryResponse;
-    readonly variables: PassesQueryVariables;
+export type PassesPaginationQuery = {
+    readonly response: PassesPaginationQueryResponse;
+    readonly variables: PassesPaginationQueryVariables;
 };
 
 
 
 /*
-query PassesQuery(
+query PassesPaginationQuery(
   $count: Int!
   $cursor: String
 ) {
@@ -75,7 +75,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "PassesQuery",
+    "name": "PassesPaginationQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -89,7 +89,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "PassesQuery",
+    "name": "PassesPaginationQuery",
     "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
@@ -205,12 +205,12 @@ return {
   },
   "params": {
     "operationKind": "query",
-    "name": "PassesQuery",
+    "name": "PassesPaginationQuery",
     "id": null,
-    "text": "query PassesQuery(\n  $count: Int!\n  $cursor: String\n) {\n  ...Passes_query\n}\n\nfragment Passes_query on Query {\n  passes(first: $count, after: $cursor) {\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n    edges {\n      node {\n        id\n        website\n        login\n        password\n        __typename\n      }\n      cursor\n    }\n  }\n}\n",
+    "text": "query PassesPaginationQuery(\n  $count: Int!\n  $cursor: String\n) {\n  ...Passes_query\n}\n\nfragment Passes_query on Query {\n  passes(first: $count, after: $cursor) {\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n    edges {\n      node {\n        id\n        website\n        login\n        password\n        __typename\n      }\n      cursor\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = '41b3d07af504257ac323741a0c8aa00c';
+(node as any).hash = '4dc46f7f0eca4a323ec69746e5f78762';
 export default node;
