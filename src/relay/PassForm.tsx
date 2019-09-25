@@ -4,8 +4,8 @@ import Colors from '../components/colors';
 import TextInput from '../components/TextInput/TextInput';
 import Button from '../components/Button/Button';
 import Base from '../components/Base/Base';
-import CreatePassMutation from '../relay/mutations/CreatePass';
-import EditPassMutation from '../relay/mutations/EditPass';
+import CreatePassMutation from './mutations/CreatePass';
+import EditPassMutation from './mutations/EditPass';
 
 const Form = ({navigation}) => {
   const pass = navigation.getParam('pass') || {};

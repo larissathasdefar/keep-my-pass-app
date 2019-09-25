@@ -5,7 +5,7 @@ import Colors from '../components/colors';
 import Base from '../components/Base/Base';
 import TextInput from '../components/TextInput/TextInput';
 import Button from '../components/Button/Button';
-import SignUpMutation from '../relay/mutations/SignUp';
+import SignUpMutation from './mutations/SignUp';
 
 const Text = styled.Text`
   margin-top: 8;
@@ -43,6 +43,7 @@ const SignUp = ({navigation}) => {
       <TextInput
         placeholder="Login"
         value={login}
+        autoCapitalize="none"
         keyboardType="email-address"
         onChangeText={text => setLogin(text)}
       />

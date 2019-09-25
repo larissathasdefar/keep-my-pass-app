@@ -4,8 +4,8 @@ import {createStackNavigator} from 'react-navigation-stack';
 import LoginScreen from './relay/Login';
 import HomeScreen from './relay/Passes';
 import DetailScreen from './relay/PassDetail';
-import PassFormScreen from './screens/PassForm';
-import SignUpScreen from './screens/SignUp';
+import PassFormScreen from './relay/PassForm';
+import SignUpScreen from './relay/SignUp';
 
 const AppNavigator = createStackNavigator(
   {

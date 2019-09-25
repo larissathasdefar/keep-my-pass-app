@@ -15,7 +15,8 @@ const Header = styled.Text`
   flex: 1;
   font-size: 16;
   text-align: center;
-  margin-bottom: -26;
+  margin-bottom: -16;
+  margin-top: -16;
 `;
 
 const Footer = styled.View`
@@ -59,7 +60,7 @@ class Passes extends Component {
     // TODO: refetch
 
     this.props.relay.loadMore(
-      1,  // Fetch the next pass item
+      2,  // Fetch the next pass item
       error => {
         error && console.log('loadMore: ', error);
       },
@@ -70,28 +71,38 @@ class Passes extends Component {
     if (!this.props) {
       return <Text>Loading...</Text>;
     }
+
+    const {query, navigation, relay} = this.props;
+    const items = query.passes.edges;
     return (
       <Base>
-        <Header>Click on the emails to see the password</Header>
+        <Header>Click on the emails to see the password or create a new one.</Header>
 
         <ScrollableArea>
           {
-            this.props.query.passes.edges.map(({ node: pass }, index) => (
-              <Section key={pass.id} first={index === 0}>
-                <TouchArea onPress={() => this.props.navigation.navigate('Detail', {id: pass.id})}>
-                  <Description>
-                    <Bold>Service:</Bold> {pass.website}
-                  </Description>
-                  <Description>
-                    <Bold>Login:</Bold> {pass.login}
-                  </Description>
-                </TouchArea>
-                <Button title="Copy" onPress={() => writeToClipboard(pass.password)} />
-              </Section>
-            ))
+            items.length === 0
+              ? (
+                <Fragment>
+                  <Description>I'm feeling empty... so...</Description>
+                  <Description>Could you create a new password to make me feel better? :(</Description>
+                </Fragment>
+              )
+              : items.map(({ node: pass }, index) => (
+                <Section key={pass.id} first={index === 0}>
+                  <TouchArea onPress={() => navigation.navigate('Detail', {id: pass.id})}>
+                    <Description>
+                      <Bold>Service:</Bold> {pass.website}
+                    </Description>
+                    <Description>
+                      <Bold>Login:</Bold> {pass.login}
+                    </Description>
+                  </TouchArea>
+                  <Button title="Copy" onPress={() => writeToClipboard(pass.password)} />
+                </Section>
+              ))
           }
           {
-            this.props.relay.hasMore() && (
+            relay.hasMore() && (
               <Button
                 title="Load More"
                 onPress={() => this._loadMore()}
@@ -103,7 +114,7 @@ class Passes extends Component {
       <Footer>
         <Button
           title="Add a password"
-          onPress={() => this.props.navigation.navigate('PassForm')}
+          onPress={() => navigation.navigate('PassForm')}
         />
       </Footer>
       </Base>
@@ -178,6 +189,6 @@ export default createQueryRenderer(
         ...Passes_query
       }
     `,
-    variables: {cursor: null, count: 1},
+    variables: {cursor: null, count: 2},
   },
 );
