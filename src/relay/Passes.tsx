@@ -2,9 +2,25 @@ import React, {Fragment, Component} from 'react';
 import {Text, Clipboard} from 'react-native';
 import {graphql, createPaginationContainer} from 'react-relay';
 import styled from 'styled-components';
+import Base from '../components/Base/Base';
 import Button from '../components/Button/Button';
 import Colors from '../components/colors';
 import createQueryRenderer from './QueryRender';
+
+const ScrollableArea = styled.ScrollView`
+  flex: 10;
+`;
+
+const Header = styled.Text`
+  flex: 1;
+  font-size: 16;
+  text-align: center;
+  margin-bottom: -26;
+`;
+
+const Footer = styled.View`
+  flex: 1;
+`;
 
 const Section = styled.View`
   margin: 8px 0px;
@@ -40,6 +56,7 @@ class Passes extends Component {
     if (!this.props.relay.hasMore() || this.props.relay.isLoading()) {
       return;
     }
+    // TODO: refetch
 
     this.props.relay.loadMore(
       1,  // Fetch the next pass item
@@ -54,31 +71,42 @@ class Passes extends Component {
       return <Text>Loading...</Text>;
     }
     return (
-      <Fragment>
-        {
-          this.props.query.passes.edges.map(({ node: pass }, index) => (
-            <Section key={pass.id} first={index === 0}>
-              <TouchArea onPress={() => this.props.navigation.navigate('Detail', {id: pass.id})}>
-                <Description>
-                  <Bold>Service:</Bold> {pass.website}
-                </Description>
-                <Description>
-                  <Bold>Login:</Bold> {pass.login}
-                </Description>
-              </TouchArea>
-              <Button title="Copy" onPress={() => writeToClipboard(pass.password)} />
-            </Section>
-          ))
-        }
-        {
-          this.props.relay.hasMore() && (
-            <Button
-              title="Load More"
-              onPress={() => this._loadMore()}
-            />
-          )
-        }
-      </Fragment>
+      <Base>
+        <Header>Click on the emails to see the password</Header>
+
+        <ScrollableArea>
+          {
+            this.props.query.passes.edges.map(({ node: pass }, index) => (
+              <Section key={pass.id} first={index === 0}>
+                <TouchArea onPress={() => this.props.navigation.navigate('Detail', {id: pass.id})}>
+                  <Description>
+                    <Bold>Service:</Bold> {pass.website}
+                  </Description>
+                  <Description>
+                    <Bold>Login:</Bold> {pass.login}
+                  </Description>
+                </TouchArea>
+                <Button title="Copy" onPress={() => writeToClipboard(pass.password)} />
+              </Section>
+            ))
+          }
+          {
+            this.props.relay.hasMore() && (
+              <Button
+                title="Load More"
+                onPress={() => this._loadMore()}
+              />
+            )
+          }
+      </ScrollableArea>
+
+      <Footer>
+        <Button
+          title="Add a password"
+          onPress={() => this.props.navigation.navigate('PassForm')}
+        />
+      </Footer>
+      </Base>
     );
   }
 }

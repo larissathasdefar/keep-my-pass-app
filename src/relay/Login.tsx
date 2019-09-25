@@ -4,7 +4,7 @@ import Colors from '../components/colors';
 import Base from '../components/Base/Base';
 import TextInput from '../components/TextInput/TextInput';
 import Button from '../components/Button/Button';
-import LoginMutation from '../relay/mutations/Login';
+import LoginMutation from './mutations/Login';
 
 const Text = styled.Text`
   margin-top: 8;
@@ -34,6 +34,7 @@ const Login = ({navigation}) => {
       <TextInput
         placeholder="Login"
         value={login}
+        autoCapitalize="none"
         keyboardType="email-address"
         onChangeText={text => setLogin(text)}
       />
@@ -50,7 +51,7 @@ const Login = ({navigation}) => {
           LoginMutation.login({
             input: { email: login, password },
             onCompleted: () => navigation.navigate('Home'),
-            onError: () => navigation.navigate('Login'),
+            onError: () => alert('Sorry... Something went wrong...'),
           })
         }} />
       <Button

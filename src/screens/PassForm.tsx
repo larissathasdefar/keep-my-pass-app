@@ -40,6 +40,7 @@ const Form = ({navigation}) => {
               <TextInput
                 placeholder="Login"
                 value={loginState}
+                autoCapitalize="none"
                 keyboardType="email-address"
                 onChangeText={text => setLogin(text)}
               />
@@ -60,13 +61,19 @@ const Form = ({navigation}) => {
             EditPassMutation.editPass({
               input: { id: pass.id, password: passwordState },
               onCompleted: () => navigation.navigate('Home'),
-              onError: () => navigation.navigate('Login'),
+              onError: () => {
+                alert('Sorry... Something went wrong...')
+                navigation.navigate('Home');
+              },
             });
           } else {
             CreatePassMutation.createPass({
               input: { website: serviceState, login: loginState, password: passwordState },
               onCompleted: () => navigation.navigate('Home'),
-              onError: () => navigation.navigate('Login'),
+              onError: () => {
+                alert('Sorry... Something went wrong...')
+                navigation.navigate('Home');
+              },
             });
           }
         }}

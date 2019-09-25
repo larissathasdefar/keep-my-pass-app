@@ -59,7 +59,7 @@ const SignUp = ({navigation}) => {
           SignUpMutation.signUp({
             input: { name, email: login, password },
             onCompleted: () => navigation.navigate('Home'),
-            onError: () => navigation.navigate('Login'),
+            onError: () => alert('Sorry... Something went wrong...'),
           })
         }} />
     </Base>

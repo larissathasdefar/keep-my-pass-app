@@ -14,6 +14,7 @@ type IProps = {
   placeholder?: string,
   keyboardType?: string,
   secureTextEntry?: boolean,
+  autoCapitalize?: string,
   onChangeText?: (string) => void,
 };
 
@@ -23,12 +24,14 @@ const TextInput = ({
   keyboardType,
   secureTextEntry,
   onChangeText,
+  autoCapitalize,
 }: IProps) => (
   <Wrapper
     placeholder={placeholder}
     value={value}
     keyboardType={keyboardType}
     secureTextEntry={secureTextEntry}
+    autoCapitalize={autoCapitalize}
     onChangeText={onChangeText}
   />
 );

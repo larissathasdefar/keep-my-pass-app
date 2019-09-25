@@ -16,7 +16,12 @@ const editPass = ({ input, onCompleted, onError }) => {
       }
     }`,
     variables: { input },
-    onCompleted,
+    onCompleted: props => {
+      if (props.PassChangePassword.error !== null) {
+        return onError(props);
+      }
+      onCompleted && onCompleted(props)
+    },
     onError,
   })
 }

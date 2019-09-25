@@ -21,10 +21,11 @@ const login = ({ input, onCompleted, onError }) => {
     }`,
     variables: { input },
     onCompleted: props => {
-      if (props.UserLoginWithEmail.error === null) {
-        storeToken(props.UserLoginWithEmail.token, onError);
-        onCompleted && onCompleted(props)
+      if (props.UserLoginWithEmail.error !== null) {
+        return onError(props);
       }
+      storeToken(props.UserLoginWithEmail.token, onError);
+      onCompleted && onCompleted(props)
     },
     onError,
   })

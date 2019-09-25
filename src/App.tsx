@@ -1,8 +1,8 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
-import LoginScreen from './screens/Login';
-import HomeScreen from './screens/Home';
+import LoginScreen from './relay/Login';
+import HomeScreen from './relay/Passes';
 import DetailScreen from './relay/PassDetail';
 import PassFormScreen from './screens/PassForm';
 import SignUpScreen from './screens/SignUp';

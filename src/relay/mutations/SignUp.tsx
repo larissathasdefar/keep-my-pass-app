@@ -21,10 +21,11 @@ const signUp = ({ input, onCompleted, onError }) => {
     }`,
     variables: { input },
     onCompleted: props => {
-      if (props.UserRegisterWithEmail.error === null) {
-        storeToken(props.UserRegisterWithEmail.token, onError);
-        onCompleted && onCompleted(props)
+      if (props.UserRegisterWithEmail.error !== null) {
+        return onError(props);
       }
+      storeToken(props.UserRegisterWithEmail.token, onError);
+      onCompleted && onCompleted(props)
     },
     onError,
   })

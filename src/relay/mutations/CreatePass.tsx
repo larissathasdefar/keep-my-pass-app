@@ -16,7 +16,12 @@ const createPass = ({ input, onCompleted, onError }) => {
       }
     }`,
     variables: { input },
-    onCompleted,
+    onCompleted: props => {
+      if (props.PassCreate.error !== null) {
+        return onError(props);
+      }
+      onCompleted && onCompleted(props)
+    },
     onError,
   })
 }
