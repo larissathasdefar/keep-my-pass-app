@@ -4,6 +4,7 @@ import Colors from '../components/colors';
 import Base from '../components/Base/Base';
 import TextInput from '../components/TextInput/TextInput';
 import Button from '../components/Button/Button';
+import PasswordInput from '../components/PasswordInput/PasswordInput';
 import LoginMutation from './mutations/Login';
 
 const Text = styled.Text`
@@ -39,8 +40,7 @@ const Login = ({navigation}) => {
         onChangeText={text => setLogin(text)}
       />
       <Text>Password</Text>
-      <TextInput
-        secureTextEntry
+      <PasswordInput
         placeholder="Password"
         value={password}
         onChangeText={text => setPassword(text)}

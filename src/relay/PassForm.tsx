@@ -2,6 +2,7 @@ import React, {useState, Fragment} from 'react';
 import {StyleSheet, Text} from 'react-native';
 import Colors from '../components/colors';
 import TextInput from '../components/TextInput/TextInput';
+import PasswordInput from '../components/PasswordInput/PasswordInput';
 import Button from '../components/Button/Button';
 import Base from '../components/Base/Base';
 import CreatePassMutation from './mutations/CreatePass';
@@ -14,7 +15,6 @@ const Form = ({navigation}) => {
   const [loginState, setLogin] = useState(pass.login);
   const [passwordState, setPassword] = useState(pass.password);
   // TODO: Let reuse email already filed on other passwords
-  // TODO: password field hide/show
   return (
     <Base>
       <Text style={styles.title}>
@@ -48,8 +48,7 @@ const Form = ({navigation}) => {
         )
       }
       <Text style={styles.sectionDescription}>Password</Text>
-      <TextInput
-        secureTextEntry
+      <PasswordInput
         placeholder="Password"
         value={passwordState}
         onChangeText={text => setPassword(text)}

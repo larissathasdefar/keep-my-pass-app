@@ -120,6 +120,7 @@ class Passes extends Component {
     if (!this.props) {
       return <Text>Loading...</Text>;
     }
+    // TODO: subscription on create pass
 
     const {query, navigation} = this.props;
     return (
