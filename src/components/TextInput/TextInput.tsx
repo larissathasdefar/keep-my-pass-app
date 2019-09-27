@@ -9,18 +9,29 @@ const Wrapper = styled.TextInput`
   border-radius: 4;
 `;
 
+type IProps = {
+  value?: string,
+  placeholder?: string,
+  keyboardType?: string,
+  secureTextEntry?: boolean,
+  autoCapitalize?: string,
+  onChangeText?: (string) => void,
+};
+
 const TextInput = ({
   value,
   placeholder,
   keyboardType,
   secureTextEntry,
   onChangeText,
-}) => (
+  autoCapitalize,
+}: IProps) => (
   <Wrapper
     placeholder={placeholder}
     value={value}
     keyboardType={keyboardType}
     secureTextEntry={secureTextEntry}
+    autoCapitalize={autoCapitalize}
     onChangeText={onChangeText}
   />
 );

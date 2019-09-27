@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
+    "start-ios": "react-native run-ios --simulator=\"iPhone 11 Pro\"",
     "test": "jest",
     "lint": "eslint .",
-    "relay": "relay-compiler --src ./src --schema ./data/schema.graphql"
+    "relay": "relay-compiler --watchman false --src ./src --schema data/schema.graphql --language typescript --artifactDirectory ./src/relay/__generated__"
   },
   "dependencies": {
     "react": "16.8.6",
@@ -22,15 +23,22 @@
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/runtime": "^7.6.0",
+    "@react-native-community/async-storage": "1.6.1",
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-jest": "^24.9.0",
     "babel-plugin-relay": "5.0.0",
     "eslint": "^6.3.0",
     "graphql": "14.5.4",
+    "graphql-compiler": "1.7.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
+    "react-native-webview": "7.0.5",
     "react-test-renderer": "16.8.6",
-    "relay-compiler": "5.0.0"
+    "relay-compiler": "5.0.0",
+    "relay-compiler-language-typescript": "4.7.0",
+    "relay-devtools": "1.4.0",
+    "relay-runtime": "5.0.0",
+    "typescript": "3.6.3"
   },
   "jest": {
     "preset": "react-native"
