@@ -10,6 +10,7 @@ import EditPassMutation from './mutations/EditPass';
 
 const Form = ({navigation}) => {
   const pass = navigation.getParam('pass') || {};
+  const refreshPasses = navigation.getParam('refreshPasses');
   const editing = pass.id !== undefined;
   const [serviceState, setService] = useState(pass.website);
   const [loginState, setLogin] = useState(pass.login);
@@ -68,7 +69,10 @@ const Form = ({navigation}) => {
           } else {
             CreatePassMutation.createPass({
               input: { website: serviceState, login: loginState, password: passwordState },
-              onCompleted: () => navigation.navigate('Home'),
+              onCompleted: () => {
+                navigation.navigate('Home')
+                refreshPasses()
+              },
               onError: () => {
                 alert('Sorry... Something went wrong...')
                 navigation.navigate('Home');

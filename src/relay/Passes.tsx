@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, Clipboard} from 'react-native';
+import {Text, Clipboard, View} from 'react-native';
 import {graphql, createPaginationContainer} from 'react-relay';
 import styled from 'styled-components';
 import Base from '../components/Base/Base';
@@ -108,11 +108,17 @@ class Passes extends Component {
   }
 
   renderFooter = () => {
-    return this.props.relay.hasMore() && (
-      <Button
-        title="Load More"
-        onPress={() => this.handleLoadMore()}
-      />
+    return (
+      <View style={{height: 50}}>
+        {
+          this.props.relay.hasMore() && (
+            <Button
+              title="Load More"
+              onPress={() => this.handleLoadMore()}
+            />
+          )
+        }
+      </View>
     )
   }
 
@@ -120,7 +126,6 @@ class Passes extends Component {
     if (!this.props) {
       return <Text>Loading...</Text>;
     }
-    // TODO: subscription on create pass
 
     const {query, navigation} = this.props;
     return (
@@ -131,6 +136,7 @@ class Passes extends Component {
           query.passes.edges.length > 0
             ? (
               <FlatListArea
+                key={query.passes.edges.length}
                 data={query.passes.edges}
                 renderItem={this.renderItem}
                 keyExtractor={item => item.node.id}
@@ -151,7 +157,7 @@ class Passes extends Component {
       <Footer>
         <Button
           title="Add a password"
-          onPress={() => navigation.navigate('PassForm')}
+          onPress={() => navigation.navigate('PassForm', { refreshPasses: this.handleRefresh })}
         />
       </Footer>
       </Base>
